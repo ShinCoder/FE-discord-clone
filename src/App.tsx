@@ -7,8 +7,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import AppRouter from 'AppRouter';
-import { defaultTheme } from 'constants/theme';
+import { defaultTheme } from '~/constants';
+
+import AppRouter from './AppRouter';
 
 function App() {
   const [queryClient] = useState(

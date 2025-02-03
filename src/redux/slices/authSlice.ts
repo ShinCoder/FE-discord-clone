@@ -1,9 +1,12 @@
-import { StorageKey } from 'constants';
-
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ILoginResult, IUserWithSettingsDto } from 'shared/types/api';
-import { clearLocalStorage, readLocalStorage, writeLocalStorage } from 'utils';
+import { StorageKey } from '~/constants';
+import {
+  clearLocalStorage,
+  readLocalStorage,
+  writeLocalStorage
+} from '~/utils';
+import { ILoginResult, IUserWithSettingsDto } from '~shared/types/api';
 
 export interface AuthSlice {
   token?: {
@@ -28,7 +31,7 @@ export const authSlice = createSlice({
     setAccountData: (state, action: PayloadAction<IUserWithSettingsDto>) => {
       state.data = action.payload;
     },
-    clearAuthState: (state) => {
+    clearAuthState: () => {
       clearLocalStorage(StorageKey.TOKEN);
       return {};
     }

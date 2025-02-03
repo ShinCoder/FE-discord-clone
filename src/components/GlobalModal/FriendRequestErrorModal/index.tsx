@@ -1,11 +1,10 @@
-import { ModalKey } from 'constants';
-
 import { Box, Button, Modal, Typography, Zoom } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { hideModal } from 'redux/slices/modalSlice';
+import { ModalKey } from '~/constants';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
+import { hideModal } from '~/redux/slices/modalSlice';
 
 import { ModalState } from '../modal.type';
 

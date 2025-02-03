@@ -3,10 +3,13 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "shared/*": [
+      "~/*": [
+        "./*"
+      ],
+      "~shared/*": [
         "../shared/*"
       ]
-    }
+    },
   },
   "references": [
     {

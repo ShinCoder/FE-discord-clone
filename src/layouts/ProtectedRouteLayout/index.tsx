@@ -1,11 +1,10 @@
-import { publicRoutes } from 'constants';
-
 import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 // import { io, Socket } from 'socket.io-client';
 
-import GlobalModal from 'components/GlobalModal';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import GlobalModal from '~/components/GlobalModal';
+import { publicRoutes } from '~/constants';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 
 // import { setSocket } from 'redux/slices/socketSlice';
 

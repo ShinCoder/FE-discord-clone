@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import ReduxProvider from 'redux/ReduxProvider.tsx';
+import ReduxProvider from '~/redux/ReduxProvider.tsx';
 
 import App from './App.tsx';
 

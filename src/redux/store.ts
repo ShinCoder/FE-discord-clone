@@ -1,8 +1,8 @@
-import { IS_DEV } from 'constants';
-
 import { configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
+
+import { IS_DEV } from '~/constants';
 
 import rootSaga from './saga';
 import authReducer from './slices/authSlice';

@@ -8,10 +8,10 @@ import {
   createBrowserRouter
 } from 'react-router-dom';
 
-import GlobalLoading from 'components/GlobalLoading';
-import AuthLayout from 'layouts/AuthLayout';
-import ProtectedRouteLayout from 'layouts/ProtectedRouteLayout';
-import PublicRouteLayout from 'layouts/PublicRouteLayout';
+import GlobalLoading from '~/components/GlobalLoading';
+import AuthLayout from '~/layouts/AuthLayout';
+import ProtectedRouteLayout from '~/layouts/ProtectedRouteLayout';
+import PublicRouteLayout from '~/layouts/PublicRouteLayout';
 // import ServerLayout from 'layouts/ServerLayout';
 // import DMLayout from 'layouts/DMLayout';
 // import ChannelMe from 'pages/ChannelMe';
@@ -21,9 +21,9 @@ import PublicRouteLayout from 'layouts/PublicRouteLayout';
 // import DiscoverableServer from 'pages/DiscoverableServer';
 // import Shop from 'pages/Shop';
 // import DirectMessage from 'pages/DirectMessage';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { clearAuthState, setAccountData } from 'redux/slices/authSlice';
-import { setErrorMessage, setLoading } from 'redux/slices/statusSlice';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
+import { clearAuthState, setAccountData } from '~/redux/slices/authSlice';
+import { setErrorMessage, setLoading } from '~/redux/slices/statusSlice';
 
 // import { getMe } from 'services';
 

@@ -1,7 +1,7 @@
 import { takeLatest, select, put } from 'redux-saga/effects';
 
 // import toast from 'react-hot-toast';
-import { StatusSlice, setErrorMessage } from 'redux/slices/statusSlice';
+import { StatusSlice, setErrorMessage } from '../slices/statusSlice';
 
 function* watchSetErrorMessage() {
   yield takeLatest(setErrorMessage.type, function* toastError() {
