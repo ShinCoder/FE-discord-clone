@@ -33,7 +33,12 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true }
       ],
-      'prettier/prettier': 'warn',
+      'prettier/prettier': [
+        'warn',
+        {
+          endOfLine: 'auto'
+        }
+      ],
 
       'import/no-unresolved': 'error',
       'import/order': [
@@ -46,7 +51,9 @@ export default tseslint.config(
             caseInsensitive: true
           }
         }
-      ]
+      ],
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off'
     },
     settings: {
       'import/resolver': {
