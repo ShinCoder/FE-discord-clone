@@ -1,14 +1,14 @@
-import { protectedRoutes, publicRoutes } from 'constants';
-
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import {
   Navigate,
+  RouteObject,
   RouterProvider,
   createBrowserRouter
 } from 'react-router-dom';
 
 import GlobalLoading from '~/components/GlobalLoading';
+import { protectedRoutes, publicRoutes } from '~/constants';
 import AuthLayout from '~/layouts/AuthLayout';
 import ProtectedRouteLayout from '~/layouts/ProtectedRouteLayout';
 import PublicRouteLayout from '~/layouts/PublicRouteLayout';
@@ -22,12 +22,12 @@ import PublicRouteLayout from '~/layouts/PublicRouteLayout';
 // import Shop from 'pages/Shop';
 // import DirectMessage from 'pages/DirectMessage';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
-import { clearAuthState, setAccountData } from '~/redux/slices/authSlice';
+import { clearAuthState, setUserData } from '~/redux/slices/authSlice';
 import { setErrorMessage, setLoading } from '~/redux/slices/statusSlice';
 
 // import { getMe } from 'services';
 
-const router = createBrowserRouter([
+export const routerConfig: Array<RouteObject> = [
   {
     path: '/',
     children: [
@@ -99,7 +99,9 @@ const router = createBrowserRouter([
       }
     ]
   }
-]);
+];
+
+const router = createBrowserRouter(routerConfig);
 
 const AppRouter = () => {
   const dispatch = useAppDispatch();
@@ -118,7 +120,7 @@ const AppRouter = () => {
   //       dispatch(setLoading(true));
   //       try {
   //         const me = await refetch({ throwOnError: true });
-  //         if (me.data?.data) dispatch(setAccountData(me.data?.data));
+  //         if (me.data?.data) dispatch(setUserData(me.data?.data));
   //       } catch (err: any) {
   //         if (err?.status !== 401) {
   //           dispatch(

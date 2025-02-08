@@ -10,6 +10,9 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": [
+      "vitest/globals"
+    ],
     "baseUrl": "src",
     "paths": {
       "~/*": [
@@ -34,6 +37,7 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src"
+    "src",
+    "tests"
   ]
 }

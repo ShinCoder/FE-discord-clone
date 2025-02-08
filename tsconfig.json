@@ -1,6 +1,9 @@
 {
   "files": [],
   "compilerOptions": {
+    "types": [
+      "vitest/globals"
+    ],
     "baseUrl": "src",
     "paths": {
       "~/*": [
