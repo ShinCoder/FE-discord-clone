@@ -1,9 +1,14 @@
 import path from 'path';
+
 import { defineConfig } from 'vitest/config';
-import viteTsConfigPath from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  plugins: [viteTsConfigPath()],
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, './src'),
+      '~shared': path.resolve(__dirname, './shared')
+    }
+  },
   test: {
     environment: 'jsdom',
     globals: true,
