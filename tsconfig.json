@@ -4,13 +4,13 @@
     "types": [
       "vitest/globals"
     ],
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "~/*": [
-        "./*"
+        "src/*"
       ],
       "~shared/*": [
-        "../shared/*"
+        "shared/*"
       ]
     },
   },
