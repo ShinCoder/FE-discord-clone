@@ -1,9 +1,7 @@
 import path from 'path';
 
-import react from '@vitejs/plugin-react-swc';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 
-// https://vite.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
@@ -11,5 +9,9 @@ export default defineConfig({
       '~shared': path.resolve(__dirname, './shared')
     }
   },
-  plugins: [react()]
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: 'tests/setup.ts'
+  }
 });

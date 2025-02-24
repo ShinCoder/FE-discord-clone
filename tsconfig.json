@@ -1,7 +1,18 @@
 {
   "files": [],
   "compilerOptions": {
-    "baseUrl": "src"
+    "types": [
+      "vitest/globals"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "src/*"
+      ],
+      "~shared/*": [
+        "shared/*"
+      ]
+    },
   },
   "references": [
     {
