@@ -1,19 +1,14 @@
 import {
-  IGetMeResult,
   ILoginData,
   ILoginResult,
   IRegisterData,
   IVerifyData
 } from '~shared/types/api';
 
-import { apiClient, apiClientWithAuth } from './client';
+import { apiClient } from './client';
 
 export const login = (data: ILoginData) => {
   return apiClient.post<ILoginResult>('/auth/login', data);
-};
-
-export const getMe = () => {
-  return apiClientWithAuth.get<IGetMeResult>('/users/me');
 };
 
 export const register = (data: IRegisterData) => {

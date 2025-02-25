@@ -16,8 +16,8 @@ import PublicRouteLayout from '~/layouts/PublicRouteLayout';
 // import DMLayout from 'layouts/DMLayout';
 import ChannelMe from '~/pages/ChannelMe';
 import Login from '~/pages/Login';
-// import Register from 'pages/Register';
-// import Verify from 'pages/Verify';
+import Register from '~/pages/Register';
+import Verify from '~/pages/Verify';
 // import DiscoverableServer from 'pages/DiscoverableServer';
 // import Shop from 'pages/Shop';
 // import DirectMessage from 'pages/DirectMessage';
@@ -48,17 +48,17 @@ export const routerConfig: Array<RouteObject> = [
               {
                 path: publicRoutes.login,
                 element: <Login />
+              },
+              {
+                path: publicRoutes.register,
+                element: <Register />
               }
-              // {
-              //   path: publicRoutes.register,
-              //   element: <Register />
-              // }
             ]
+          },
+          {
+            path: publicRoutes.verify,
+            element: <Verify />
           }
-          // {
-          //   path: publicRoutes.verify,
-          //   element: <Verify />
-          // }
         ]
       },
       {
