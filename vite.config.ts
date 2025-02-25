@@ -11,5 +11,8 @@ export default defineConfig({
       '~shared': path.resolve(__dirname, './shared')
     }
   },
+  server: {
+    port: 4200
+  },
   plugins: [react()]
 });

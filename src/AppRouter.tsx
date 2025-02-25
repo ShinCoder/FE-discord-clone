@@ -14,8 +14,8 @@ import ProtectedRouteLayout from '~/layouts/ProtectedRouteLayout';
 import PublicRouteLayout from '~/layouts/PublicRouteLayout';
 // import ServerLayout from 'layouts/ServerLayout';
 // import DMLayout from 'layouts/DMLayout';
-// import ChannelMe from 'pages/ChannelMe';
-// import Login from 'pages/Login';
+import ChannelMe from '~/pages/ChannelMe';
+import Login from '~/pages/Login';
 // import Register from 'pages/Register';
 // import Verify from 'pages/Verify';
 // import DiscoverableServer from 'pages/DiscoverableServer';
@@ -24,8 +24,7 @@ import PublicRouteLayout from '~/layouts/PublicRouteLayout';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { clearAuthState, setUserData } from '~/redux/slices/authSlice';
 import { setErrorMessage, setLoading } from '~/redux/slices/statusSlice';
-
-// import { getMe } from 'services';
+import { getMe } from '~/services';
 
 export const routerConfig: Array<RouteObject> = [
   {
@@ -46,10 +45,10 @@ export const routerConfig: Array<RouteObject> = [
           {
             element: <PublicRouteLayout />,
             children: [
-              // {
-              //   path: publicRoutes.login,
-              //   element: <Login />
-              // },
+              {
+                path: publicRoutes.login,
+                element: <Login />
+              }
               // {
               //   path: publicRoutes.register,
               //   element: <Register />
@@ -67,7 +66,12 @@ export const routerConfig: Array<RouteObject> = [
         children: [
           {
             path: protectedRoutes.app,
-            element: <Navigate to={protectedRoutes.myChannels} />
+            element: (
+              <Navigate
+                to={protectedRoutes.myChannels}
+                replace
+              />
+            )
           }
           // {
           //   element: <ServerLayout />,
@@ -108,37 +112,37 @@ const AppRouter = () => {
 
   const authState = useAppSelector((state) => state.auth);
 
-  // const { isLoading, refetch } = useQuery({
-  //   queryKey: ['me'],
-  //   queryFn: getMe,
-  //   enabled: false
-  // });
+  const { isLoading, refetch } = useQuery({
+    queryKey: ['me'],
+    queryFn: getMe,
+    enabled: false
+  });
 
-  // useEffect(() => {
-  //   if (authState.token) {
-  //     const fetchMe = async () => {
-  //       dispatch(setLoading(true));
-  //       try {
-  //         const me = await refetch({ throwOnError: true });
-  //         if (me.data?.data) dispatch(setUserData(me.data?.data));
-  //       } catch (err: any) {
-  //         if (err?.status !== 401) {
-  //           dispatch(
-  //             setErrorMessage('Something went wrong, please try again later')
-  //           );
-  //         } else {
-  //           dispatch(setErrorMessage('Session expired, please login again'));
-  //         }
-  //         dispatch(clearAuthState());
-  //       }
-  //       dispatch(setLoading(false));
-  //     };
+  useEffect(() => {
+    if (authState.token) {
+      const fetchMe = async () => {
+        dispatch(setLoading(true));
+        try {
+          const me = await refetch({ throwOnError: true });
+          if (me.data?.data) dispatch(setUserData(me.data?.data));
+        } catch (err: any) {
+          if (err?.status !== 401) {
+            dispatch(
+              setErrorMessage('Something went wrong, please try again later')
+            );
+          } else {
+            dispatch(setErrorMessage('Session expired, please login again'));
+          }
+          dispatch(clearAuthState());
+        }
+        dispatch(setLoading(false));
+      };
 
-  //     fetchMe();
-  //   }
-  // }, [authState.token, dispatch, refetch]);
+      fetchMe();
+    }
+  }, [authState.token, dispatch, refetch]);
 
-  return /*isLoading ? <GlobalLoading /> :*/ <RouterProvider router={router} />;
+  return isLoading ? <GlobalLoading /> : <RouterProvider router={router} />;
 };
 
 export default AppRouter;
