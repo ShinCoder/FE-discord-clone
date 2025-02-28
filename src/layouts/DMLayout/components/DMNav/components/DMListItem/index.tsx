@@ -4,10 +4,14 @@ import { useTheme } from '@mui/material/styles';
 import { memo, useCallback, MouseEvent } from 'react';
 
 import UserAvatar from '~/components/UserAvatar';
-import { EConnectionStatus, IUserWithRelationshipDto } from '~shared/types/api';
+import {
+  IUserDto,
+  WithConnectionStatus,
+  WithRelationship
+} from '~shared/types/api';
 
 interface DMListItemProps {
-  data: IUserWithRelationshipDto & { connectionStatus: EConnectionStatus };
+  data: IUserDto & WithRelationship & WithConnectionStatus;
   onClick: () => void;
   onDelete: () => void;
 }

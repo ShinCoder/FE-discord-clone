@@ -123,7 +123,7 @@ const AppRouter = () => {
       const fetchMe = async () => {
         dispatch(setLoading(true));
         try {
-          const me = await refetch();
+          const me = await refetch({ throwOnError: true });
           if (me.data?.data) dispatch(setUserData(me.data?.data));
         } catch (err: any) {
           if (err?.status !== 401) {
