@@ -10,16 +10,16 @@ import {
 import GlobalLoading from '~/components/GlobalLoading';
 import { protectedRoutes, publicRoutes } from '~/constants';
 import AuthLayout from '~/layouts/AuthLayout';
+import DMLayout from '~/layouts/DMLayout';
 import ProtectedRouteLayout from '~/layouts/ProtectedRouteLayout';
 import PublicRouteLayout from '~/layouts/PublicRouteLayout';
-// import ServerLayout from 'layouts/ServerLayout';
-// import DMLayout from 'layouts/DMLayout';
+import ServerLayout from '~/layouts/ServerLayout';
 import ChannelMe from '~/pages/ChannelMe';
+import DiscoverableServer from '~/pages/DiscoverableServer';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
+import Shop from '~/pages/Shop';
 import Verify from '~/pages/Verify';
-// import DiscoverableServer from 'pages/DiscoverableServer';
-// import Shop from 'pages/Shop';
 // import DirectMessage from 'pages/DirectMessage';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { clearAuthState, setUserData } from '~/redux/slices/authSlice';
@@ -72,33 +72,33 @@ export const routerConfig: Array<RouteObject> = [
                 replace
               />
             )
+          },
+          {
+            element: <ServerLayout />,
+            children: [
+              {
+                element: <DMLayout />,
+                children: [
+                  {
+                    path: protectedRoutes.myChannels,
+                    element: <ChannelMe />
+                  },
+                  // {
+                  //   path: protectedRoutes.directMessages('pattern'),
+                  //   element: <DirectMessage />
+                  // },
+                  {
+                    path: protectedRoutes.shop,
+                    element: <Shop />
+                  }
+                ]
+              },
+              {
+                path: protectedRoutes.discoverServers,
+                element: <DiscoverableServer />
+              }
+            ]
           }
-          // {
-          //   element: <ServerLayout />,
-          //   children: [
-          //     {
-          //       element: <DMLayout />,
-          //       children: [
-          //         {
-          //           path: protectedRoutes.myChannels,
-          //           element: <ChannelMe />
-          //         },
-          //         {
-          //           path: protectedRoutes.directMessages('pattern'),
-          //           element: <DirectMessage />
-          //         },
-          //         {
-          //           path: protectedRoutes.shop,
-          //           element: <Shop />
-          //         }
-          //       ]
-          //     },
-          //     {
-          //       path: protectedRoutes.discoverServers,
-          //       element: <DiscoverableServer />
-          //     }
-          //   ]
-          // }
         ]
       }
     ]

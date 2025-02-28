@@ -7,9 +7,10 @@ import { ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { defaultTheme } from '~/constants';
-
 import AppRouter from './AppRouter';
+import CustomToaster from './components/CustomToaster';
+import GlobalLoadingState from './components/GlobalLoadingState';
+import { defaultTheme } from './constants';
 
 function App() {
   const [queryClient] = useState(
@@ -34,8 +35,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        {/* <GlobalLoadingState /> */}
-        {/* <CustomToaster /> */}
+        <GlobalLoadingState />
+        <CustomToaster />
         <AppRouter />
       </ThemeProvider>
     </QueryClientProvider>

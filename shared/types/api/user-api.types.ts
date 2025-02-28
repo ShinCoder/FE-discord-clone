@@ -32,15 +32,17 @@ export type IRelationshipDto = {
   updatedAt: string;
 };
 
-export type IUserWithRelationshipDto = IUserDto & {
+export type WithRelationship = {
   inRelationshipWith?: IRelationshipDto;
+};
+
+export type WithConnectionStatus = {
+  connectionStatus: EConnectionStatus;
 };
 
 export type IUserSettingsDto = {
   dmSettings: {
-    pinnedDms: Array<
-      IUserWithRelationshipDto & { connectionStatus: EConnectionStatus }
-    >;
+    pinnedDms: Array<IUserDto & WithRelationship & WithConnectionStatus>;
   };
 };
 
@@ -49,3 +51,25 @@ export type IUserWithSettingsDto = IUserDto & {
 };
 
 export type IGetMeResult = IUserWithSettingsDto;
+
+export type IGetFriendsResult = {
+  friends: Array<IUserDto & WithRelationship & WithConnectionStatus>;
+};
+
+export type ISendFriendRequestData = {
+  targetId?: string;
+  targetUsername?: string;
+};
+
+export type IGetFriendRequestsResult = {
+  incomingRequests: Array<IUserDto & WithRelationship>;
+  outgoingRequests: Array<IUserDto & WithRelationship>;
+};
+
+export type IAcceptFriendRequestData = {
+  targetId: string;
+};
+
+export type IIgnoreFriendRequestData = {
+  targetId: string;
+};

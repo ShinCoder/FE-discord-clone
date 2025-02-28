@@ -1,10 +1,10 @@
 import FriendRequestErrorModal from './FriendRequestErrorModal';
-// import ProfileModal from './ProfileModal';
+import ProfileModal from './ProfileModal';
 
 const GlobalModal = () => {
   return (
     <>
-      {/* <ProfileModal /> */}
+      <ProfileModal />
       <FriendRequestErrorModal />
     </>
   );
