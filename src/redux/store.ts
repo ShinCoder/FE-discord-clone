@@ -7,8 +7,8 @@ import { IS_DEV } from '~/constants';
 import rootSaga from './saga';
 import authReducer from './slices/authSlice';
 import modalReducer from './slices/modalSlice';
+import socketReducer from './slices/socketSlice';
 import statusReducer from './slices/statusSlice';
-// import socketReducer from './slices/socketSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -25,7 +25,7 @@ export const store = configureStore({
   reducer: {
     status: statusReducer,
     auth: authReducer,
-    // socket: socketReducer,
+    socket: socketReducer,
     modal: modalReducer
   },
   middleware: (getDefaultMiddleware) =>

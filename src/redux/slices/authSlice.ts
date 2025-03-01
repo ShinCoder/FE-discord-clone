@@ -6,7 +6,13 @@ import {
   readLocalStorage,
   writeLocalStorage
 } from '~/utils';
-import { ITokenDto, IUserWithSettingsDto } from '~shared/types/api';
+import {
+  ITokenDto,
+  IUserDto,
+  IUserWithSettingsDto,
+  WithConnectionStatus,
+  WithRelationship
+} from '~shared/types/api';
 
 export interface AuthSlice {
   token?: {
@@ -34,16 +40,21 @@ export const authSlice = createSlice({
     clearAuthState: () => {
       clearLocalStorage(StorageKey.TOKEN);
       return {};
+    },
+    setPinnedDms: (
+      state,
+      action: PayloadAction<
+        Array<IUserDto & WithRelationship & WithConnectionStatus>
+      >
+    ) => {
+      if (state.data) {
+        state.data.settings.dmSettings.pinnedDms = action.payload;
+      }
     }
-    // setPinnedDms: (state, action: PayloadAction<Array<AccountDto>>) => {
-    //   if (state.data) {
-    //     state.data.userSettings.dmSettings.pinnedDms = action.payload;
-    //   }
-    // }
   }
 });
 
-export const { setToken, setUserData, clearAuthState /* setPinnedDms*/ } =
+export const { setToken, setUserData, clearAuthState, setPinnedDms } =
   authSlice.actions;
 
 export default authSlice.reducer;

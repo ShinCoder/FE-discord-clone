@@ -15,12 +15,12 @@ import ProtectedRouteLayout from '~/layouts/ProtectedRouteLayout';
 import PublicRouteLayout from '~/layouts/PublicRouteLayout';
 import ServerLayout from '~/layouts/ServerLayout';
 import ChannelMe from '~/pages/ChannelMe';
+import DirectMessage from '~/pages/DirectMessage';
 import DiscoverableServer from '~/pages/DiscoverableServer';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import Shop from '~/pages/Shop';
 import Verify from '~/pages/Verify';
-// import DirectMessage from 'pages/DirectMessage';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { clearAuthState, setUserData } from '~/redux/slices/authSlice';
 import { setErrorMessage, setLoading } from '~/redux/slices/statusSlice';
@@ -83,10 +83,10 @@ export const routerConfig: Array<RouteObject> = [
                     path: protectedRoutes.myChannels,
                     element: <ChannelMe />
                   },
-                  // {
-                  //   path: protectedRoutes.directMessages('pattern'),
-                  //   element: <DirectMessage />
-                  // },
+                  {
+                    path: protectedRoutes.directMessages('pattern'),
+                    element: <DirectMessage />
+                  },
                   {
                     path: protectedRoutes.shop,
                     element: <Shop />
