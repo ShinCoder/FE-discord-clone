@@ -1,8 +1,11 @@
 import {
   IAcceptFriendRequestData,
+  IBlockData,
+  IGetBlockedResult,
   IGetFriendRequestsResult,
   IGetFriendsResult,
   IGetMeResult,
+  IGetUserProfileResult,
   IIgnoreFriendRequestData,
   ISendFriendRequestData
 } from '~shared/types/api';
@@ -70,5 +73,32 @@ export const removeFriend = (params: {
 }) => {
   return apiClientWithAuth.delete(
     `/users/${params.accountId}/friend/${params.targetId}`
+  );
+};
+
+export const getUserProfile = (accountId: string) => {
+  return apiClientWithAuth.get<IGetUserProfileResult>(
+    `/users/${accountId}/profile`
+  );
+};
+
+export const getBlockedUsers = (accountId: string) => {
+  return apiClientWithAuth.get<IGetBlockedResult>(
+    `/users/${accountId}/blocked`
+  );
+};
+
+export const blockUser = (params: { accountId: string; targetId: string }) => {
+  return apiClientWithAuth.post(`/users/${params.accountId}/block`, {
+    targetId: params.targetId
+  } satisfies IBlockData);
+};
+
+export const unblockUser = (params: {
+  accountId: string;
+  targetId: string;
+}) => {
+  return apiClientWithAuth.delete(
+    `/users/${params.accountId}/block/${params.targetId}`
   );
 };
