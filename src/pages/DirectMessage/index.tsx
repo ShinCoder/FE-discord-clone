@@ -9,7 +9,6 @@ import { ProfileModalExtraProps } from '~/components/GlobalModal/ProfileModal';
 import UserAvatar from '~/components/UserAvatar';
 import { ModalKey, protectedRoutes } from '~/constants';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
-import { setPinnedDms } from '~/redux/slices/authSlice';
 import { showModal } from '~/redux/slices/modalSlice';
 import { setLoading } from '~/redux/slices/statusSlice';
 import {
@@ -17,7 +16,6 @@ import {
   blockUser,
   ignoreFriendRequest,
   getUserProfile,
-  pinDm,
   removeFriend,
   sendFriendRequest,
   unblockUser
@@ -27,7 +25,7 @@ import {
   ProcessedMessageDate,
   concatenateProcessedMessages
 } from '~/utils';
-import { SocketEvents } from '~shared/constants/socket';
+import { SocketEvents } from '~shared/constants';
 import { EMessageType } from '~shared/types/api';
 import {
   IJoinDirectMessageRoomData,
@@ -47,34 +45,6 @@ const DirectMessage = () => {
 
   const { socket } = useAppSelector((state) => state.socket);
   const { data: userData } = useAppSelector((state) => state.auth);
-
-  const pinDmMutation = useMutation({
-    mutationFn: pinDm,
-    onMutate: () => {
-      dispatch(setLoading(true));
-    },
-    onSettled: () => {
-      dispatch(setLoading(false));
-    },
-    onSuccess: (data) => {
-      if (data.data?.newPin && userData) {
-        dispatch(
-          setPinnedDms([
-            data.data.newPin,
-            ...userData.settings.dmSettings.pinnedDms
-          ])
-        );
-      }
-    }
-  });
-
-  useEffect(() => {
-    if (userData && id) {
-      if (!userData.settings.dmSettings.pinnedDms.find((e) => e.id === id)) {
-        pinDmMutation.mutate({ accountId: userData.id, targetId: id });
-      }
-    }
-  }, [id, pinDmMutation, userData]);
 
   useEffect(() => {
     if (id === userData?.id) {
@@ -273,6 +243,22 @@ const DirectMessage = () => {
 
   // Send & receive dm
   useEffect(() => {
+    if (socket && id) {
+      socket.emit(SocketEvents.joinDirectMessageRoom, {
+        targetId: id
+      } satisfies IJoinDirectMessageRoomData);
+    }
+
+    return () => {
+      if (socket && id) {
+        socket.emit(SocketEvents.leaveDirectMessageRoom, {
+          targetId: id
+        } satisfies ILeaveDirectMessageRoomData);
+      }
+    };
+  }, [id, profile, socket]);
+
+  useEffect(() => {
     const onReceiveDm = (_data: IReceiveDirectMessageDto) => {
       if (userData && profile) {
         setDms((pre) =>
@@ -301,25 +287,14 @@ const DirectMessage = () => {
         );
       }
     };
-
     if (socket && id) {
-      socket.emit(SocketEvents.joinDirectMessageRoom, {
-        targetId: id
-      } satisfies IJoinDirectMessageRoomData);
-
       socket.on(SocketEvents.receiveDirectMessage, onReceiveDm);
       socket.on(SocketEvents.receiveFailedDirectMessage, onReceiveFailedDm);
     }
 
     return () => {
-      if (socket && id) {
-        socket.emit(SocketEvents.leaveDirectMessageRoom, {
-          targetId: id
-        } satisfies ILeaveDirectMessageRoomData);
-
-        socket.off(SocketEvents.receiveDirectMessage, onReceiveDm);
-        socket.off(SocketEvents.receiveFailedDirectMessage, onReceiveFailedDm);
-      }
+      socket?.off(SocketEvents.receiveDirectMessage, onReceiveDm);
+      socket?.off(SocketEvents.receiveFailedDirectMessage, onReceiveFailedDm);
     };
   }, [id, profile, socket, userData]);
 

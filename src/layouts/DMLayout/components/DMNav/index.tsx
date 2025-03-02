@@ -56,6 +56,8 @@ const DMNav = () => {
     [unpinDmMutation, userData]
   );
 
+  console.log(userData);
+
   return userData ? (
     <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: '1px' }}>
       {userData.settings.dmSettings.pinnedDms.map((_pin) => (
