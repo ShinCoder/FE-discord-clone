@@ -67,6 +67,7 @@ interface PaletteConstants {
     '560': string;
     '600': string;
     '630': string;
+    '660': string;
     '700': string;
     '730': string;
     '800': string;
@@ -147,6 +148,7 @@ let paletteConstants: PaletteConstants = {
     '560': placeholderColor,
     '600': placeholderColor,
     '630': placeholderColor,
+    '660': placeholderColor,
     '700': placeholderColor,
     '730': placeholderColor,
     '800': placeholderColor
@@ -231,6 +233,7 @@ paletteConstants = {
     '560': `hsl(${paletteConstants['primary-hsl'][560]} / 1)`,
     '600': `hsl(${paletteConstants['primary-hsl'][600]} / 1)`,
     '630': `hsl(${paletteConstants['primary-hsl'][630]} / 1)`,
+    '660': 'hsl(228 calc(1*6.667%) 14.706% /1)',
     '700': `hsl(${paletteConstants['primary-hsl'][700]} / 1)`,
     '730': `hsl(${paletteConstants['primary-hsl'][730]} / 1)`,
     '800': `hsl(${paletteConstants['primary-hsl'][800]} / 1)`
@@ -258,7 +261,11 @@ declare module '@mui/material/styles' {
         modifierSelected: string;
         primary: string;
         secondary: string;
+        secondaryAlt: string;
         tertiary: string;
+      };
+      border: {
+        subtle: string;
       };
       brand: {
         '500': string;
@@ -367,7 +374,11 @@ declare module '@mui/material/styles' {
         modifierSelected: string;
         primary: string;
         secondary: string;
+        secondaryAlt: string;
         tertiary: string;
+      };
+      border: {
+        subtle: string;
       };
       brand: {
         '500': string;
@@ -537,7 +548,12 @@ const defaultThemeOptions: ThemeOptions = {
       modifierSelected: `color-mix(in oklab, hsl(${paletteConstants['primary-hsl'][500]} / 0.6) 100%, hsl(0 0% 0% / 0.6) 0%)`,
       primary: `color-mix(in oklab, ${paletteConstants.primary[600]} 100%, black 0%)`,
       secondary: `color-mix(in oklab, ${paletteConstants.primary[630]} 100%, black 0%)`,
+      secondaryAlt: `color-mix(in oklab, ${paletteConstants.primary[660]} 100%, black 0%)`,
       tertiary: `color-mix(in oklab, ${paletteConstants.primary[700]} 100%, black 0%)`
+    },
+    border: {
+      subtle:
+        'color-mix(in oklab, hsl(0 calc(1*0%) 100% /0.08) 100%, hsl(0 0% 0% / 0.08) 0%)'
     },
     brand: {
       '500': paletteConstants.brand[500]

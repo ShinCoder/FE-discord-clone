@@ -1,6 +1,7 @@
-import { Box, Grid2, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Grid2, Tooltip, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
@@ -36,6 +37,7 @@ import {
 } from '~shared/types/socket';
 
 import MessageArea from './components/MessageArea';
+import { ProfileSectionHeader, ProfileSectionText } from './elements';
 
 const DirectMessage = () => {
   const theme = useTheme();
@@ -381,7 +383,7 @@ const DirectMessage = () => {
           height={`calc(100dvh - ${theme.dcShape.defaultHeight.header})`}
         >
           <Grid2
-            size={8}
+            size={{ xs: 12, lg: 8 }}
             height='100%'
           >
             <Box
@@ -408,15 +410,141 @@ const DirectMessage = () => {
               <ChannelTextarea onSubmit={sendDm} />
             </Box>
           </Grid2>
-          <Grid2 size={4}>
+          <Grid2
+            size={{ xs: 0, lg: 4 }}
+            sx={{ maxHeight: '100%' }}
+          >
             <Box
               sx={{
                 height: '100%',
-                padding: '16px',
-                borderLeft: `1px solid ${theme.dcPalette.background.modifierAccent}`
+                display: 'flex',
+                flexDirection: 'column',
+                borderLeft: `1px solid ${theme.dcPalette.background.modifierAccent}`,
+                backgroundColor: theme.dcPalette.background.secondaryAlt,
+                overflow: 'hidden'
               }}
             >
-              Comming not soon
+              <Box sx={{ flex: 1, overflow: 'auto', scrollbarWidth: 'none' }}>
+                <Box
+                  sx={{
+                    height: '120px',
+                    minHeight: '120px',
+                    backgroundColor: profile.bannerColor
+                  }}
+                />
+                <Box sx={{ position: 'relative' }}>
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '-70px',
+                      left: '16px',
+                      borderRadius: '50%',
+                      border: `9px solid ${theme.dcPalette.primary[800]}`
+                    }}
+                  >
+                    <UserAvatar
+                      src={profile.avatar}
+                      alt={profile.username}
+                      color={profile.bannerColor}
+                      showStatus
+                      status={profile.connectionStatus}
+                      size='80px'
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      rowGap: '12px',
+                      padding: '50px 16px 12px 16px'
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        variant='h2'
+                        sx={{
+                          color: theme.dcPalette.text.normal,
+                          fontSize: '1.25rem',
+                          fontWeight: 700,
+                          lineHeight: 1.2
+                        }}
+                      >
+                        {profile.displayName}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: theme.dcPalette.header.primary,
+                          fontSize: '0.875rem',
+                          fontWeight: 400,
+                          lineHeight: '18px'
+                        }}
+                      >
+                        {profile.username}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        rowGap: '12px',
+                        padding: '12px',
+                        borderRadius: '8px',
+                        backgroundColor: theme.dcPalette.background.modFaint
+                      }}
+                    >
+                      {profile.about && (
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            rowGap: '8px'
+                          }}
+                        >
+                          <ProfileSectionHeader variant='h2'>
+                            About Me
+                          </ProfileSectionHeader>
+                          <ProfileSectionText>
+                            {profile.about}
+                          </ProfileSectionText>
+                        </Box>
+                      )}
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          rowGap: '8px'
+                        }}
+                      >
+                        <ProfileSectionHeader variant='h2'>
+                          Member Since
+                        </ProfileSectionHeader>
+                        <ProfileSectionText>
+                          {dayjs(profile.createdAt).format('MMM DD, YYYY')}
+                        </ProfileSectionText>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+              <Button
+                sx={{
+                  height: '44px',
+                  color: theme.dcPalette.interactive.normal,
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  lineHeight: '16px',
+                  textTransform: 'none',
+                  borderTop: `1px solid ${theme.dcPalette.border.subtle}`,
+                  borderRadius: 0,
+
+                  '&:hover': {
+                    color: theme.dcPalette.interactive.hover
+                  }
+                }}
+                onClick={handleOpenProfileModal}
+              >
+                View Full Profile
+              </Button>
             </Box>
           </Grid2>
         </Grid2>

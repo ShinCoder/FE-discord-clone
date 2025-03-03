@@ -358,8 +358,8 @@ const ChannelMe = () => {
         container
         height='100%'
       >
-        <Grid2 size={8}>{renderTabContent()}</Grid2>
-        <Grid2 size={4}>
+        <Grid2 size={{ xs: 12, lg: 8 }}>{renderTabContent()}</Grid2>
+        <Grid2 size={{ xs: 0, lg: 4 }}>
           <Box
             sx={{
               height: '100%',
