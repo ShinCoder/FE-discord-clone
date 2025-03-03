@@ -61,7 +61,6 @@ const ProfileModal = () => {
     const relationshipStatus =
       modalState?.extraProps?.profile.inRelationshipWith?.status;
     // if there is incoming or outgoing friend request
-    console.log(modalState?.extraProps);
     if (
       relationshipStatus &&
       [ERelationshipStatus.PENDING, ERelationshipStatus.REQUESTING].includes(
