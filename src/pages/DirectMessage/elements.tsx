@@ -6,7 +6,7 @@ export const ProfileSectionHeader = styled(Typography)(({ theme }) => ({
   fontSize: '0.75rem',
   fontWeight: 600,
   lineHeight: 1.3
-}));
+})) as typeof Typography;
 
 export const ProfileSectionText = styled(Typography)(({ theme }) => ({
   color: theme.dcPalette.text.normal,

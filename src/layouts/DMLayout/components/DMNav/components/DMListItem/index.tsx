@@ -71,7 +71,8 @@ const DMListItem = (props: DMListItemProps) => {
           sx={{
             color: 'inherit',
             fontSize: '1rem',
-            lineHeight: 500,
+            fontWeight: 500,
+            lineHeight: '20px',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
             overflow: 'hidden'

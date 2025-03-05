@@ -461,7 +461,7 @@ const DirectMessage = () => {
                   >
                     <Box>
                       <Typography
-                        variant='h2'
+                        component='h2'
                         sx={{
                           color: theme.dcPalette.text.normal,
                           fontSize: '1.25rem',
@@ -500,7 +500,7 @@ const DirectMessage = () => {
                             rowGap: '8px'
                           }}
                         >
-                          <ProfileSectionHeader variant='h2'>
+                          <ProfileSectionHeader component='h2'>
                             About Me
                           </ProfileSectionHeader>
                           <ProfileSectionText>
@@ -515,7 +515,7 @@ const DirectMessage = () => {
                           rowGap: '8px'
                         }}
                       >
-                        <ProfileSectionHeader variant='h2'>
+                        <ProfileSectionHeader component='h2'>
                           Member Since
                         </ProfileSectionHeader>
                         <ProfileSectionText>

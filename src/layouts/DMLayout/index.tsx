@@ -3,6 +3,7 @@ import { Box, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 
+import SettingsFooter from '~/components/SettingsFooter';
 import { getScrollbarStyle } from '~/utils';
 
 import DMNav from './components/DMNav';
@@ -29,6 +30,7 @@ const DMLayout = () => {
           component='nav'
           sx={{
             flex: 1,
+            maxHeight: '100%',
             padding: `${theme.spacing(1)} 0 0 ${theme.spacing(1)}`,
             overflow: 'auto',
             scrollbarGutter: 'stable',
@@ -57,6 +59,7 @@ const DMLayout = () => {
           />
           <DMNav />
         </Box>
+        <SettingsFooter />
       </Box>
       <Outlet />
     </>

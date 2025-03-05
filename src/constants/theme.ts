@@ -76,6 +76,8 @@ interface PaletteConstants {
     '345': string;
     '400': string;
     '430': string;
+    '500': string;
+    '530': string;
   };
   white: {
     base: string;
@@ -156,7 +158,9 @@ let paletteConstants: PaletteConstants = {
   red: {
     '345': placeholderColor,
     '400': placeholderColor,
-    '430': placeholderColor
+    '430': placeholderColor,
+    '500': placeholderColor,
+    '530': placeholderColor
   },
   white: {
     base: placeholderColor,
@@ -241,7 +245,9 @@ paletteConstants = {
   red: {
     '345': `hsl(${paletteConstants['red-hsl'][345]} / 1)`,
     '400': `hsl(${paletteConstants['red-hsl'][400]} / 1)`,
-    '430': `hsl(${paletteConstants['red-hsl'][430]} / 1)`
+    '430': `hsl(${paletteConstants['red-hsl'][430]} / 1)`,
+    '500': 'hsl(359.504 calc(1 * 60.199%) 39.412% / 1)',
+    '530': 'hsl(358.919 calc(1 * 63.429%) 34.314% / 1)'
   },
   white: {
     base: `hsl(${paletteConstants['white-hsl'].base} / 1)`,
@@ -271,6 +277,9 @@ declare module '@mui/material/styles' {
         '500': string;
       };
       button: {
+        dangerBackground: string;
+        dangerBackgroundActive: string;
+        dangerBackgroundHover: string;
         filledBrandBackground: string;
         filledBrandBackgroundHover: string;
         filledBrandText: string;
@@ -384,6 +393,9 @@ declare module '@mui/material/styles' {
         '500': string;
       };
       button: {
+        dangerBackground: string;
+        dangerBackgroundActive: string;
+        dangerBackgroundHover: string;
         filledBrandBackground: string;
         filledBrandBackgroundHover: string;
         filledBrandText: string;
@@ -559,6 +571,9 @@ const defaultThemeOptions: ThemeOptions = {
       '500': paletteConstants.brand[500]
     },
     button: {
+      dangerBackground: paletteConstants.red[430],
+      dangerBackgroundActive: paletteConstants.red[530],
+      dangerBackgroundHover: paletteConstants.red[500],
       filledBrandBackground: paletteConstants.brand[500],
       filledBrandBackgroundHover: paletteConstants.brand[560],
       filledBrandText: paletteConstants.white.base,
