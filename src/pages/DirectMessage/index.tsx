@@ -439,7 +439,7 @@ const DirectMessage = () => {
                       top: '-70px',
                       left: '16px',
                       borderRadius: '50%',
-                      border: `9px solid ${theme.dcPalette.primary[800]}`
+                      border: `6px solid ${theme.dcPalette.background.secondaryAlt}`
                     }}
                   >
                     <UserAvatar

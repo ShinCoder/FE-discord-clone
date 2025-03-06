@@ -49,6 +49,7 @@ interface PaletteConstants {
   brand: {
     '500': string;
     '560': string;
+    '600': string;
   };
   green: {
     '330': string;
@@ -61,6 +62,7 @@ interface PaletteConstants {
     '230': string;
     '330': string;
     '360': string;
+    '400': string;
     '430': string;
     '530': string;
     '500': string;
@@ -131,7 +133,8 @@ let paletteConstants: PaletteConstants = {
   },
   brand: {
     '500': placeholderColor,
-    '560': placeholderColor
+    '560': placeholderColor,
+    '600': placeholderColor
   },
   green: {
     '330': placeholderColor,
@@ -144,6 +147,7 @@ let paletteConstants: PaletteConstants = {
     '230': placeholderColor,
     '330': placeholderColor,
     '360': placeholderColor,
+    '400': placeholderColor,
     '430': placeholderColor,
     '500': placeholderColor,
     '530': placeholderColor,
@@ -218,7 +222,8 @@ paletteConstants = {
   },
   brand: {
     '500': `hsl(${paletteConstants['brand-hsl'][500]} / 1)`,
-    '560': `hsl(${paletteConstants['brand-hsl'][560]} / 1)`
+    '560': `hsl(${paletteConstants['brand-hsl'][560]} / 1)`,
+    '600': 'hsl(234.857 calc(1 * 46.667%) 44.118% / 1)'
   },
   green: {
     '330': `hsl(${paletteConstants['green-hsl'][330]} / 1)`,
@@ -231,6 +236,7 @@ paletteConstants = {
     '230': `hsl(${paletteConstants['primary-hsl'][230]} / 1)`,
     '330': `hsl(${paletteConstants['primary-hsl'][330]} / 1)`,
     '360': `hsl(${paletteConstants['primary-hsl'][360]} / 1)`,
+    '400': 'hsl(222.857 calc(1 * 5.833%) 52.941% / 1)',
     '430': `hsl(${paletteConstants['primary-hsl'][430]} / 1)`,
     '500': `hsl(${paletteConstants['primary-hsl'][500]} / 1)`,
     '530': `hsl(${paletteConstants['primary-hsl'][530]} / 1)`,
@@ -245,7 +251,7 @@ paletteConstants = {
   red: {
     '345': `hsl(${paletteConstants['red-hsl'][345]} / 1)`,
     '400': `hsl(${paletteConstants['red-hsl'][400]} / 1)`,
-    '430': `hsl(${paletteConstants['red-hsl'][430]} / 1)`,
+    '430': `hsl(358.16 calc(1 * 68.776%) 53.529% / 1)`,
     '500': 'hsl(359.504 calc(1 * 60.199%) 39.412% / 1)',
     '530': 'hsl(358.919 calc(1 * 63.429%) 34.314% / 1)'
   },
@@ -281,9 +287,12 @@ declare module '@mui/material/styles' {
         dangerBackgroundActive: string;
         dangerBackgroundHover: string;
         filledBrandBackground: string;
+        filledBrandBackgroundActive: string;
         filledBrandBackgroundHover: string;
         filledBrandText: string;
+        outlineDangerBorder: string;
         secondaryBackground: string;
+        secondaryBackgroundActive: string;
         secondaryBackgroundDisabled: string;
         secondaryBackgroundHover: string;
         secondaryText: string;
@@ -397,9 +406,12 @@ declare module '@mui/material/styles' {
         dangerBackgroundActive: string;
         dangerBackgroundHover: string;
         filledBrandBackground: string;
+        filledBrandBackgroundActive: string;
         filledBrandBackgroundHover: string;
         filledBrandText: string;
+        outlineDangerBorder: string;
         secondaryBackground: string;
+        secondaryBackgroundActive: string;
         secondaryBackgroundDisabled: string;
         secondaryBackgroundHover: string;
         secondaryText: string;
@@ -575,9 +587,12 @@ const defaultThemeOptions: ThemeOptions = {
       dangerBackgroundActive: paletteConstants.red[530],
       dangerBackgroundHover: paletteConstants.red[500],
       filledBrandBackground: paletteConstants.brand[500],
+      filledBrandBackgroundActive: paletteConstants.brand[600],
       filledBrandBackgroundHover: paletteConstants.brand[560],
       filledBrandText: paletteConstants.white.base,
+      outlineDangerBorder: paletteConstants.red[400],
       secondaryBackground: paletteConstants.primary[500],
+      secondaryBackgroundActive: paletteConstants.primary[400],
       secondaryBackgroundDisabled: paletteConstants.primary[500],
       secondaryBackgroundHover: paletteConstants.primary[430],
       secondaryText: paletteConstants.white[500]

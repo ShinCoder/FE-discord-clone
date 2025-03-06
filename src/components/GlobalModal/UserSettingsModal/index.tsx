@@ -18,7 +18,9 @@ import { hideModal } from '~/redux/slices/modalSlice';
 import { getScrollbarStyle } from '~/utils';
 
 import LogoutModal from './components/LogoutModal';
-import { NavHeader, NavItem, NavSeparator } from './elements';
+import MyAccountTab from './components/MyAccountTab';
+import { NavHeader, NavSeparator } from './elements';
+import NavItem from './NavItem';
 
 enum SettingNavTab {
   'My Account' = 'My Account',
@@ -62,6 +64,22 @@ const UserSettingsModal = () => {
   const handleCloseLogoutModal = useCallback(() => {
     setLogoutModalOpen(false);
   }, []);
+
+  const renderContent = useCallback(() => {
+    switch (activeTab) {
+      case SettingNavTab['My Account']:
+        return (
+          userData && (
+            <MyAccountTab
+              userData={userData}
+              onNavigateToProfileTab={handleSetActiveTab(SettingNavTab.Profile)}
+            />
+          )
+        );
+      default:
+        return <Box>Probaly not coming soon</Box>;
+    }
+  }, [activeTab, handleSetActiveTab, userData]);
 
   return (
     <Dialog
@@ -129,88 +147,58 @@ const UserSettingsModal = () => {
               <NavItem
                 active={activeTab === SettingNavTab['My Account']}
                 onClick={handleSetActiveTab(SettingNavTab['My Account'])}
-              >
-                {SettingNavTab['My Account']}
-              </NavItem>
+                label={SettingNavTab['My Account']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Profile']}
                 onClick={handleSetActiveTab(SettingNavTab['Profile'])}
-              >
-                {SettingNavTab['Profile']}
-              </NavItem>
+                label={SettingNavTab['Profile']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Content & Social']}
                 onClick={handleSetActiveTab(SettingNavTab['Content & Social'])}
-              >
-                {SettingNavTab['Content & Social']}
-              </NavItem>
+                label={SettingNavTab['Content & Social']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Data & Privacy']}
                 onClick={handleSetActiveTab(SettingNavTab['Data & Privacy'])}
-              >
-                {SettingNavTab['Data & Privacy']}
-              </NavItem>
+                label={SettingNavTab['Data & Privacy']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Family Center']}
                 onClick={handleSetActiveTab(SettingNavTab['Family Center'])}
-              >
-                {SettingNavTab['Family Center']}
-              </NavItem>
+                label={SettingNavTab['Family Center']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Authorized Apps']}
                 onClick={handleSetActiveTab(SettingNavTab['Authorized Apps'])}
-              >
-                {SettingNavTab['Authorized Apps']}
-              </NavItem>
+                label={SettingNavTab['Authorized Apps']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Devices']}
                 onClick={handleSetActiveTab(SettingNavTab['Devices'])}
-              >
-                {SettingNavTab['Devices']}
-              </NavItem>
+                label={SettingNavTab['Devices']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Connections']}
                 onClick={handleSetActiveTab(SettingNavTab['Connections'])}
-              >
-                {SettingNavTab['Connections']}
-              </NavItem>
+                label={SettingNavTab['Connections']}
+              />
               <NavItem
                 active={activeTab === SettingNavTab['Clips']}
                 onClick={handleSetActiveTab(SettingNavTab['Clips'])}
-              >
-                {SettingNavTab['Clips']}
-              </NavItem>
+                label={SettingNavTab['Clips']}
+              />
               <NavSeparator />
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  color: theme.dcPalette.interactive.normal,
-                  fontSize: '1rem',
-                  fontWeight: 500,
-                  lineHeight: '20px',
-                  padding: '6px 10px',
-                  borderRadius: '4px',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  transition: 'all 0.2s ease',
-                  cursor: 'pointer',
-                  userSelect: 'none',
-
-                  '&:hover': {
-                    color: theme.dcPalette.interactive.hover,
-                    backgroundColor: theme.dcPalette.background.modifierHover
-                  }
-                }}
+              <NavItem
                 onClick={handleOpenLogoutModal}
-              >
-                <Typography sx={{ font: 'inherit' }}>Log Out</Typography>
-                <LogoutIcon
-                  sx={{ width: '16px', height: '16px', color: 'inherit' }}
-                />
-              </Box>
+                label='Log Out'
+                endAdornment={
+                  <LogoutIcon
+                    sx={{ width: '16px', height: '16px', color: 'inherit' }}
+                  />
+                }
+              />
               <NavSeparator />
             </Box>
           </Box>
@@ -228,13 +216,17 @@ const UserSettingsModal = () => {
             sx={{
               maxWidth: '740px',
               minWidth: '460px',
+              height: 'fit-content',
               minHeight: '100%',
               flex: '1 1 auto',
               padding: '60px 40px 80px 40px'
             }}
-          ></Box>
+          >
+            {renderContent()}
+          </Box>
           <Box
             sx={{
+              position: 'relative',
               flex: '0 0 36px',
               display: 'flex',
               flexDirection: 'column',
@@ -242,37 +234,39 @@ const UserSettingsModal = () => {
               paddingTop: '60px'
             }}
           >
-            <IconButton
-              sx={{
-                width: '36px',
-                height: '36px',
-                color: theme.dcPalette.interactive.normal,
-                border: `2px solid ${theme.dcPalette.interactive.normal}`,
+            <Box sx={{ position: 'fixed' }}>
+              <IconButton
+                sx={{
+                  width: '36px',
+                  height: '36px',
+                  color: theme.dcPalette.interactive.normal,
+                  border: `2px solid ${theme.dcPalette.interactive.normal}`,
 
-                '&:hover': {
-                  color: theme.dcPalette.interactive.hover,
-                  borderColor: theme.dcPalette.interactive.hover,
+                  '&:hover': {
+                    color: theme.dcPalette.interactive.hover,
+                    borderColor: theme.dcPalette.interactive.hover,
 
-                  '+ *': {
-                    color: theme.dcPalette.interactive.hover
+                    '+ *': {
+                      color: theme.dcPalette.interactive.hover
+                    }
                   }
-                }
-              }}
-              onClick={handleClose}
-            >
-              <CloseIcon sx={{ width: '18px', height: '18px' }} />
-            </IconButton>
-            <Typography
-              sx={{
-                color: theme.dcPalette.interactive.normal,
-                fontSize: '0.8125rem',
-                fontWeight: 600,
-                textAlign: 'center',
-                paddingTop: '8px'
-              }}
-            >
-              ESC
-            </Typography>
+                }}
+                onClick={handleClose}
+              >
+                <CloseIcon sx={{ width: '18px', height: '18px' }} />
+              </IconButton>
+              <Typography
+                sx={{
+                  color: theme.dcPalette.interactive.normal,
+                  fontSize: '0.8125rem',
+                  fontWeight: 600,
+                  textAlign: 'center',
+                  paddingTop: '8px'
+                }}
+              >
+                ESC
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Box>
