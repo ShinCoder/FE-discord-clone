@@ -311,36 +311,48 @@ const MyAccountTab = (props: MyAccountTabProps) => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        rowGap: '32px'
+        padding: '60px 40px 80px 40px'
       }}
     >
-      <ContentPrimaryHeader component='h3'>My Account</ContentPrimaryHeader>
-      <Tabs
-        value={activeTab}
-        onChange={handleSetActiveTab}
+      <Box
         sx={{
-          minHeight: 'auto'
-        }}
-        slotProps={{
-          list: {
-            sx: {
-              columnGap: '32px'
-            }
-          }
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '32px'
         }}
       >
-        <ContentTabLabel
-          label='Security'
-          disableRipple
-        />
-        <ContentTabLabel
-          label='Standing'
-          disableRipple
-        />
-      </Tabs>
-      {renderTabContent()}
+        <ContentPrimaryHeader component='h3'>My Account</ContentPrimaryHeader>
+        <Tabs
+          value={activeTab}
+          onChange={handleSetActiveTab}
+          sx={{
+            minHeight: 'auto',
+            borderBottom: `1px solid ${theme.dcPalette.background.modifierAccent}`
+          }}
+          slotProps={{
+            list: {
+              sx: {
+                columnGap: '32px'
+              }
+            },
+            indicator: {
+              sx: {
+                backgroundColor: theme.dcPalette.control.brandForeground
+              }
+            }
+          }}
+        >
+          <ContentTabLabel
+            label='Security'
+            disableRipple
+          />
+          <ContentTabLabel
+            label='Standing'
+            disableRipple
+          />
+        </Tabs>
+        {renderTabContent()}
+      </Box>
     </Box>
   );
 };

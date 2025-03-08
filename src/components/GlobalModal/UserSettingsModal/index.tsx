@@ -19,6 +19,7 @@ import { getScrollbarStyle } from '~/utils';
 
 import LogoutModal from './components/LogoutModal';
 import MyAccountTab from './components/MyAccountTab';
+import ProfileTab from './components/ProfileTab';
 import { NavHeader, NavSeparator } from './elements';
 import NavItem from './NavItem';
 
@@ -66,18 +67,22 @@ const UserSettingsModal = () => {
   }, []);
 
   const renderContent = useCallback(() => {
-    switch (activeTab) {
-      case SettingNavTab['My Account']:
-        return (
-          userData && (
+    if (userData) {
+      switch (activeTab) {
+        case SettingNavTab['My Account']:
+          return (
             <MyAccountTab
               userData={userData}
               onNavigateToProfileTab={handleSetActiveTab(SettingNavTab.Profile)}
             />
-          )
-        );
-      default:
-        return <Box>Probaly not coming soon</Box>;
+          );
+        case SettingNavTab['Profile']:
+          return <ProfileTab userData={userData} />;
+        default:
+          return <Box>Probaly not coming soon</Box>;
+      }
+    } else {
+      return <Box>Probaly not coming soon</Box>;
     }
   }, [activeTab, handleSetActiveTab, userData]);
 
@@ -218,8 +223,7 @@ const UserSettingsModal = () => {
               minWidth: '460px',
               height: 'fit-content',
               minHeight: '100%',
-              flex: '1 1 auto',
-              padding: '60px 40px 80px 40px'
+              flex: '1 1 auto'
             }}
           >
             {renderContent()}

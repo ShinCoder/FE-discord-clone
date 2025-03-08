@@ -15,10 +15,7 @@ const ControlledInputText = (props: ControlledInputText) => {
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, onBlur, value, ref },
-        fieldState: { error }
-      }) => (
+      render={({ field: { onChange, onBlur }, fieldState: { error } }) => (
         <InputText
           {...rest}
           inputProps={{

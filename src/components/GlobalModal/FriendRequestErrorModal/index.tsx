@@ -6,7 +6,7 @@ import { ModalKey } from '~/constants';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { hideModal } from '~/redux/slices/modalSlice';
 
-import { ModalState } from '../modal.type';
+import { ModalState } from '../modal.types';
 
 export interface FriendRequestErrorModalExtraProps {
   isFriend?: boolean;

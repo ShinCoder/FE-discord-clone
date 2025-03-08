@@ -47,6 +47,7 @@ interface PaletteConstants {
     '345': string;
   };
   brand: {
+    '360': string;
     '500': string;
     '560': string;
     '600': string;
@@ -132,6 +133,7 @@ let paletteConstants: PaletteConstants = {
     '345': placeholderColor
   },
   brand: {
+    '360': placeholderColor,
     '500': placeholderColor,
     '560': placeholderColor,
     '600': placeholderColor
@@ -221,6 +223,7 @@ paletteConstants = {
     '345': `hsl(${paletteConstants['blue-hsl'][345]} / 1)`
   },
   brand: {
+    '360': 'hsl(235.152 calc(1 * 86.087%) 77.451% / 1)',
     '500': `hsl(${paletteConstants['brand-hsl'][500]} / 1)`,
     '560': `hsl(${paletteConstants['brand-hsl'][560]} / 1)`,
     '600': 'hsl(234.857 calc(1 * 46.667%) 44.118% / 1)'
@@ -300,6 +303,9 @@ declare module '@mui/material/styles' {
       channel: {
         default: string;
         textareaBackground: string;
+      };
+      control: {
+        brandForeground: string;
       };
       green: {
         '330': string;
@@ -419,6 +425,9 @@ declare module '@mui/material/styles' {
       channel: {
         default: string;
         textareaBackground: string;
+      };
+      control: {
+        brandForeground: string;
       };
       green: {
         '330': string;
@@ -600,6 +609,9 @@ const defaultThemeOptions: ThemeOptions = {
     channel: {
       default: paletteConstants.primary[360],
       textareaBackground: `color-mix(in oklab, ${paletteConstants.primary[560]} 100%, black 0%)`
+    },
+    control: {
+      brandForeground: `color-mix(in oklab, ${paletteConstants.brand[360]} 100%, black 0%)`
     },
     green: {
       '330': paletteConstants.green[330],
