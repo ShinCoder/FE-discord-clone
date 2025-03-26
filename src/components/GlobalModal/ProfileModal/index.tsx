@@ -18,7 +18,7 @@ import {
 } from '~shared/types/api';
 
 import { PrimaryActionBtn, SecondaryActionBtn } from './elments';
-import { ModalState } from '../modal.type';
+import { ModalState } from '../modal.types';
 
 export interface ProfileModalExtraProps {
   profile: IUserDto & WithRelationship & Partial<WithConnectionStatus>;

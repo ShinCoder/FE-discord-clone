@@ -47,8 +47,10 @@ interface PaletteConstants {
     '345': string;
   };
   brand: {
+    '360': string;
     '500': string;
     '560': string;
+    '600': string;
   };
   green: {
     '330': string;
@@ -61,6 +63,7 @@ interface PaletteConstants {
     '230': string;
     '330': string;
     '360': string;
+    '400': string;
     '430': string;
     '530': string;
     '500': string;
@@ -76,6 +79,8 @@ interface PaletteConstants {
     '345': string;
     '400': string;
     '430': string;
+    '500': string;
+    '530': string;
   };
   white: {
     base: string;
@@ -128,8 +133,10 @@ let paletteConstants: PaletteConstants = {
     '345': placeholderColor
   },
   brand: {
+    '360': placeholderColor,
     '500': placeholderColor,
-    '560': placeholderColor
+    '560': placeholderColor,
+    '600': placeholderColor
   },
   green: {
     '330': placeholderColor,
@@ -142,6 +149,7 @@ let paletteConstants: PaletteConstants = {
     '230': placeholderColor,
     '330': placeholderColor,
     '360': placeholderColor,
+    '400': placeholderColor,
     '430': placeholderColor,
     '500': placeholderColor,
     '530': placeholderColor,
@@ -156,7 +164,9 @@ let paletteConstants: PaletteConstants = {
   red: {
     '345': placeholderColor,
     '400': placeholderColor,
-    '430': placeholderColor
+    '430': placeholderColor,
+    '500': placeholderColor,
+    '530': placeholderColor
   },
   white: {
     base: placeholderColor,
@@ -213,8 +223,10 @@ paletteConstants = {
     '345': `hsl(${paletteConstants['blue-hsl'][345]} / 1)`
   },
   brand: {
+    '360': 'hsl(235.152 calc(1 * 86.087%) 77.451% / 1)',
     '500': `hsl(${paletteConstants['brand-hsl'][500]} / 1)`,
-    '560': `hsl(${paletteConstants['brand-hsl'][560]} / 1)`
+    '560': `hsl(${paletteConstants['brand-hsl'][560]} / 1)`,
+    '600': 'hsl(234.857 calc(1 * 46.667%) 44.118% / 1)'
   },
   green: {
     '330': `hsl(${paletteConstants['green-hsl'][330]} / 1)`,
@@ -227,6 +239,7 @@ paletteConstants = {
     '230': `hsl(${paletteConstants['primary-hsl'][230]} / 1)`,
     '330': `hsl(${paletteConstants['primary-hsl'][330]} / 1)`,
     '360': `hsl(${paletteConstants['primary-hsl'][360]} / 1)`,
+    '400': 'hsl(222.857 calc(1 * 5.833%) 52.941% / 1)',
     '430': `hsl(${paletteConstants['primary-hsl'][430]} / 1)`,
     '500': `hsl(${paletteConstants['primary-hsl'][500]} / 1)`,
     '530': `hsl(${paletteConstants['primary-hsl'][530]} / 1)`,
@@ -241,7 +254,9 @@ paletteConstants = {
   red: {
     '345': `hsl(${paletteConstants['red-hsl'][345]} / 1)`,
     '400': `hsl(${paletteConstants['red-hsl'][400]} / 1)`,
-    '430': `hsl(${paletteConstants['red-hsl'][430]} / 1)`
+    '430': `hsl(358.16 calc(1 * 68.776%) 53.529% / 1)`,
+    '500': 'hsl(359.504 calc(1 * 60.199%) 39.412% / 1)',
+    '530': 'hsl(358.919 calc(1 * 63.429%) 34.314% / 1)'
   },
   white: {
     base: `hsl(${paletteConstants['white-hsl'].base} / 1)`,
@@ -271,10 +286,16 @@ declare module '@mui/material/styles' {
         '500': string;
       };
       button: {
+        dangerBackground: string;
+        dangerBackgroundActive: string;
+        dangerBackgroundHover: string;
         filledBrandBackground: string;
+        filledBrandBackgroundActive: string;
         filledBrandBackgroundHover: string;
         filledBrandText: string;
+        outlineDangerBorder: string;
         secondaryBackground: string;
+        secondaryBackgroundActive: string;
         secondaryBackgroundDisabled: string;
         secondaryBackgroundHover: string;
         secondaryText: string;
@@ -282,6 +303,9 @@ declare module '@mui/material/styles' {
       channel: {
         default: string;
         textareaBackground: string;
+      };
+      control: {
+        brandForeground: string;
       };
       green: {
         '330': string;
@@ -384,10 +408,16 @@ declare module '@mui/material/styles' {
         '500': string;
       };
       button: {
+        dangerBackground: string;
+        dangerBackgroundActive: string;
+        dangerBackgroundHover: string;
         filledBrandBackground: string;
+        filledBrandBackgroundActive: string;
         filledBrandBackgroundHover: string;
         filledBrandText: string;
+        outlineDangerBorder: string;
         secondaryBackground: string;
+        secondaryBackgroundActive: string;
         secondaryBackgroundDisabled: string;
         secondaryBackgroundHover: string;
         secondaryText: string;
@@ -395,6 +425,9 @@ declare module '@mui/material/styles' {
       channel: {
         default: string;
         textareaBackground: string;
+      };
+      control: {
+        brandForeground: string;
       };
       green: {
         '330': string;
@@ -559,10 +592,16 @@ const defaultThemeOptions: ThemeOptions = {
       '500': paletteConstants.brand[500]
     },
     button: {
+      dangerBackground: paletteConstants.red[430],
+      dangerBackgroundActive: paletteConstants.red[530],
+      dangerBackgroundHover: paletteConstants.red[500],
       filledBrandBackground: paletteConstants.brand[500],
+      filledBrandBackgroundActive: paletteConstants.brand[600],
       filledBrandBackgroundHover: paletteConstants.brand[560],
       filledBrandText: paletteConstants.white.base,
+      outlineDangerBorder: paletteConstants.red[400],
       secondaryBackground: paletteConstants.primary[500],
+      secondaryBackgroundActive: paletteConstants.primary[400],
       secondaryBackgroundDisabled: paletteConstants.primary[500],
       secondaryBackgroundHover: paletteConstants.primary[430],
       secondaryText: paletteConstants.white[500]
@@ -570,6 +609,9 @@ const defaultThemeOptions: ThemeOptions = {
     channel: {
       default: paletteConstants.primary[360],
       textareaBackground: `color-mix(in oklab, ${paletteConstants.primary[560]} 100%, black 0%)`
+    },
+    control: {
+      brandForeground: `color-mix(in oklab, ${paletteConstants.brand[360]} 100%, black 0%)`
     },
     green: {
       '330': paletteConstants.green[330],

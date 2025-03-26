@@ -10,6 +10,7 @@ import { ProfileModalExtraProps } from '~/components/GlobalModal/ProfileModal';
 import UserAvatar from '~/components/UserAvatar';
 import { ModalKey, protectedRoutes } from '~/constants';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
+import { setPinnedDms } from '~/redux/slices/authSlice';
 import { showModal } from '~/redux/slices/modalSlice';
 import { setLoading } from '~/redux/slices/statusSlice';
 import {
@@ -27,7 +28,7 @@ import {
   concatenateProcessedMessages
 } from '~/utils';
 import { SocketEvents } from '~shared/constants';
-import { EMessageType } from '~shared/types/api';
+import { EMessageType, ERelationshipStatus } from '~shared/types/api';
 import {
   IJoinDirectMessageRoomData,
   ILeaveDirectMessageRoomData,
@@ -37,6 +38,7 @@ import {
 } from '~shared/types/socket';
 
 import MessageArea from './components/MessageArea';
+import { SecondaryActionBtn } from './components/TargetProfile/elments';
 import { ProfileSectionHeader, ProfileSectionText } from './elements';
 
 const DirectMessage = () => {
@@ -134,8 +136,23 @@ const DirectMessage = () => {
     onSettled: () => {
       dispatch(setLoading(false));
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: async () => {
+      const newProfile = await refetch();
+      console.log(userData, newProfile.data?.data);
+      if (userData && newProfile.data?.data) {
+        const i = userData.settings.dmSettings.pinnedDms.findIndex(
+          (e) => e.id === newProfile.data?.data.id
+        );
+        if (i >= 0) {
+          dispatch(
+            setPinnedDms([
+              ...userData.settings.dmSettings.pinnedDms.slice(0, i),
+              newProfile.data?.data,
+              ...userData.settings.dmSettings.pinnedDms.slice(i + 1)
+            ])
+          );
+        }
+      }
     }
   });
 
@@ -147,8 +164,23 @@ const DirectMessage = () => {
     onSettled: () => {
       dispatch(setLoading(false));
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: async () => {
+      const newProfile = await refetch();
+      console.log(userData, newProfile.data?.data);
+      if (userData && newProfile.data?.data) {
+        const i = userData.settings.dmSettings.pinnedDms.findIndex(
+          (e) => e.id === newProfile.data?.data.id
+        );
+        if (i >= 0) {
+          dispatch(
+            setPinnedDms([
+              ...userData.settings.dmSettings.pinnedDms.slice(0, i),
+              newProfile.data?.data,
+              ...userData.settings.dmSettings.pinnedDms.slice(i + 1)
+            ])
+          );
+        }
+      }
     }
   });
 
@@ -407,7 +439,44 @@ const DirectMessage = () => {
                 onBlockUser={handleBlockUser}
                 onUnblockUser={handleUnblockUser}
               />
-              <ChannelTextarea onSubmit={sendDm} />
+              {profile.inRelationshipWith?.status ===
+              ERelationshipStatus.BLOCKED ? (
+                <Box
+                  sx={{
+                    padding: '0 16px',
+                    marginBottom: '24px'
+                  }}
+                >
+                  <Box
+                    sx={{
+                      height: '64px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '0 16px',
+                      borderRadius: '8px',
+                      backgroundColor:
+                        'color-mix(in oklab, hsl(240 calc(1*5.882%) 13.333% /1) 100%, #000 0%)'
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        color: theme.dcPalette.text.normal,
+                        fontSize: '1rem',
+                        fontWeight: 600,
+                        lineHeight: 1.25
+                      }}
+                    >
+                      You cannot send messages to a user you have blocked.
+                    </Typography>
+                    <SecondaryActionBtn onClick={handleUnblockUser}>
+                      Unblock
+                    </SecondaryActionBtn>
+                  </Box>
+                </Box>
+              ) : (
+                <ChannelTextarea onSubmit={sendDm} />
+              )}
             </Box>
           </Grid2>
           <Grid2
@@ -439,7 +508,7 @@ const DirectMessage = () => {
                       top: '-70px',
                       left: '16px',
                       borderRadius: '50%',
-                      border: `9px solid ${theme.dcPalette.primary[800]}`
+                      border: `6px solid ${theme.dcPalette.background.secondaryAlt}`
                     }}
                   >
                     <UserAvatar
@@ -461,7 +530,7 @@ const DirectMessage = () => {
                   >
                     <Box>
                       <Typography
-                        variant='h2'
+                        component='h2'
                         sx={{
                           color: theme.dcPalette.text.normal,
                           fontSize: '1.25rem',
@@ -500,7 +569,7 @@ const DirectMessage = () => {
                             rowGap: '8px'
                           }}
                         >
-                          <ProfileSectionHeader variant='h2'>
+                          <ProfileSectionHeader component='h2'>
                             About Me
                           </ProfileSectionHeader>
                           <ProfileSectionText>
@@ -515,7 +584,7 @@ const DirectMessage = () => {
                           rowGap: '8px'
                         }}
                       >
-                        <ProfileSectionHeader variant='h2'>
+                        <ProfileSectionHeader component='h2'>
                           Member Since
                         </ProfileSectionHeader>
                         <ProfileSectionText>
