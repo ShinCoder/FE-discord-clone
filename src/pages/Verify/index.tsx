@@ -106,7 +106,7 @@ const Verify = () => {
             navigate(protectedRoutes.app);
           }}
         >
-          Continue to Discord
+          Continue to SChat
         </CustomButton>
       ) : state === 'error' ? (
         <CustomButton

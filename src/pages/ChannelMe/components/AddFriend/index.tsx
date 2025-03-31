@@ -131,7 +131,7 @@ const AddFriend = (props: AddFriendProps) => {
           marginBottom: '16px'
         }}
       >
-        You can add friends with their Discord username.
+        You can add friends with their SChat username.
       </Typography>
       <Box
         component='form'
@@ -141,7 +141,7 @@ const AddFriend = (props: AddFriendProps) => {
           id='username'
           variant='outlined'
           fullWidth
-          placeholder='You can add friends with their Discord username'
+          placeholder='You can add friends with their SChat username'
           {...register('username')}
           helperText={(() => {
             switch (status) {

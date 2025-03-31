@@ -51,7 +51,7 @@ const QRSection = ({ children }: { children: ReactNode }) => {
             component='strong'
             sx={{ fontWeight: 600 }}
           >
-            Discord mobile app
+            SChat mobile app
           </Typography>{' '}
           to log in instantly
         </Typography>
