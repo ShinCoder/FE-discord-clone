@@ -1,9 +1,5 @@
-import { Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
-import loadingIconMp4Vid from './assets/loading_icon.mp4';
-import loadingIconImg from './assets/loading_icon.png';
-import loadingIconWebmVid from './assets/loading_icon.webm';
 
 const GlobalLoading = () => {
   const theme = useTheme();
@@ -24,26 +20,10 @@ const GlobalLoading = () => {
       }}
     >
       <Box sx={{ textAlign: 'center' }}>
-        <video
-          autoPlay
-          loop
-          muted
-          style={{ width: '200px', height: '200px' }}
-        >
-          <source
-            src={loadingIconWebmVid}
-            type='video/webm'
-          />
-          <source
-            src={loadingIconMp4Vid}
-            type='video/mp4'
-          />
-          <img
-            alt=''
-            src={loadingIconImg}
-          />
-        </video>
-        <Box sx={{ position: 'relative', top: '-20px' }}>
+        <Box>
+          <CircularProgress color='primary' />
+        </Box>
+        <Box>
           <Typography
             sx={{
               maxWidth: '300px',
