@@ -94,7 +94,7 @@ const Register = () => {
               CustomErrorMessage.REGISTER__AGE_RESTRICTION_VIOLATED
             ) {
               setError('dateOfBirth', {
-                message: 'Sorry, you must be over 13 to use Discord'
+                message: 'Sorry, you must be over 13 to use SChat'
               });
             }
             break;
@@ -207,7 +207,7 @@ const Register = () => {
           <ControlledCheckbox
             control={control}
             name='emailSubscribe'
-            label='(Optional) It’s okay to send me emails with Discord updates, tips, and special offers. You can opt out at any time.'
+            label='(Optional) It’s okay to send me emails with SChat updates, tips, and special offers. You can opt out at any time.'
             sx={{ marginTop: theme.spacing(1) }}
           />
           <CustomButton
@@ -226,7 +226,7 @@ const Register = () => {
               marginTop: theme.spacing(1)
             }}
           >
-            {"By registering, you agree to Discord's "}
+            {"By registering, you agree to SChat's "}
             <TermsLink to={publicRoutes.terms}>Terms of Service</TermsLink>
             {' and '}
             <PrivacyLink to={publicRoutes.privacy}>Privacy Policy</PrivacyLink>

@@ -7,6 +7,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import PulsingEllipsis from '~/components/PulsingEllipsis';
 import { protectedRoutes, publicRoutes } from '~/constants';
 import CustomButton from '~/elements/CustomButton';
+import { useAppDispatch } from '~/redux/hooks';
+import { clearAuthState } from '~/redux/slices/authSlice';
 import { verify } from '~/services';
 
 import emailCheckedImg from './assets/email_checked.svg';
@@ -16,6 +18,7 @@ import emailInfoImg from './assets/email_info.svg';
 const Verify = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();
 
@@ -27,15 +30,18 @@ const Verify = () => {
     mutationFn: (token: string) => verify({ verifyToken: token }),
     onSuccess: () => {
       setState('success');
+      dispatch(clearAuthState());
     },
     onError: () => {
       setState('error');
+      dispatch(clearAuthState());
     }
   });
 
   useEffect(() => {
     const token = searchParams.get('token');
     if (token) verifyMutation.mutate(token);
+    else setState('error');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
@@ -106,7 +112,7 @@ const Verify = () => {
             navigate(protectedRoutes.app);
           }}
         >
-          Continue to Discord
+          Continue to SChat
         </CustomButton>
       ) : state === 'error' ? (
         <CustomButton

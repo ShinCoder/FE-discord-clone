@@ -245,10 +245,9 @@ const MyAccountTab = (props: MyAccountTabProps) => {
                     Authenticator App
                   </ContentSectionHeader>
                   <ContentCommonText sx={{ paddingBottom: '20px' }}>
-                    Protect your Discord account with an extra layer of
-                    security. Once configured, you'll be required to enter your
-                    password and complete one additional step in order to sign
-                    in.
+                    Protect your SChat account with an extra layer of security.
+                    Once configured, you'll be required to enter your password
+                    and complete one additional step in order to sign in.
                   </ContentCommonText>
                   <ContentPrimaryButton>
                     Enable Authenticator App
